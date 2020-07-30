@@ -1,9 +1,11 @@
-## usage of functions
+## usage
+
+`yarn add mongo-node-client`
 
 ```js
 const {connectDb,
        disconnectDb,
-       create} = require("const mongo-node-client")
+       create} = require("mongo-node-client")
 
 (async () => {
 
