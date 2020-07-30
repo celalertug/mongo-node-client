@@ -1,28 +1,29 @@
 ## usage of functions
 
 ```js
+const {connectDb,
+       disconnectDb,
+       create} = require("const mongo-node-client")
 
-let res;
-const collection = 'myCollection';
+(async () => {
 
-const db = await mongoClient.connectDb('mongodb://localhost:27017');
-const dbo = db.db('myDb');
-await mongoClient.createCollection(dbo, collection);
+    const db = await connectDb('mongodb://localhost:27017');
+    const dbo = db.db('myDb');
+    const mongoClient = create(dbo,"myCollection");
+    
+    await mongoClient.createCollection();
+    
+    await mongoClient.insert({ user: 'adam', age: 999 });
+    await mongoClient.insert({ user: 'eva', age: 777 });
+    await mongoClient.find({ user: 'ff' });
+    await mongoClient.findOne({ user: 'ff' });
+    await mongoClient.update({ user: 'adam' }, { age: 88 });
+    await mongoClient.updateMany({ user: 'adam' }, { age: 88 });
+    await mongoClient.deleteItem({ user: 'adam' });
+    await mongoClient.deleteItems({ user: 'adam' });
 
-res = await mongoClient.insert(dbo, collection, { user: 'adam', age: 999 });
-res = await mongoClient.insert(dbo, collection, { user: 'eva', age: 777 });
-
-res = await mongoClient.find(dbo, collection, { user: 'ff' });
-res = await mongoClient.findOne(dbo, collection, { user: 'ff' });
-
-res = await mongoClient.update(dbo, collection, { user: 'adam' }, { age: 88 });
-res = await mongoClient.updateMany(dbo, collection, { user: 'adam' }, { age: 88 });
-
-res = await mongoClient.deleteItem(dbo, collection, { user: 'adam' });
-res = await mongoClient.deleteItems(dbo, collection, { user: 'adam' });
-
-mongoClient.disconnectDb(db);
-
+disconnectDb(db);
+})()
 
 ```
 

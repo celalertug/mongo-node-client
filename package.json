@@ -1,7 +1,7 @@
 {
-  "name": "js-mocha-template",
-  "version": "1.0.0",
-  "description": "mocha starter template",
+  "name": "mongo-node-client",
+  "version": "0.0.1",
+  "description": "mongodb wrapper functions and its mocks",
   "main": "index.js",
   "repository": "https://github.com/celalertug/js-mocha-template",
   "author": "celal ertug",
