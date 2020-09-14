@@ -27,23 +27,25 @@ const createCollection = (dbo, collection) => new Promise((resolve, reject) => {
 });
 
 const insert = (dbo, collection, item) => new Promise((resolve, reject) => {
-  dbo.collection(collection).insertOne(item, (err, res) => {
-    if (err) {
-      reject(err);
-      return;
-    }
-    resolve(res);
-  });
+  dbo.collection(collection)
+    .insertOne(item, (err, res) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(res);
+    });
 });
 
 const findOne = (dbo, collection, filter = {}) => new Promise((resolve, reject) => {
-  dbo.collection(collection).findOne(filter, (err, result) => {
-    if (err) {
-      reject(err);
-      return;
-    }
-    resolve(result);
-  });
+  dbo.collection(collection)
+    .findOne(filter, (err, result) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(result);
+    });
 });
 
 const find = (dbo, collection, filter = {}) => new Promise((resolve, reject) => {
@@ -104,52 +106,74 @@ const findAndSortLimit = (dbo,
 });
 
 const dropCollection = (dbo, collection) => new Promise((resolve, reject) => {
-  dbo.collection(collection).drop((err, delOK) => {
+  dbo.collection(collection)
+    .drop((err, delOK) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(delOK);
+    });
+});
+
+const deleteItem = (dbo, collection, filter = {}) => new Promise((resolve, reject) => dbo.collection(collection)
+  .deleteOne(filter, (err, obj) => {
     if (err) {
       reject(err);
       return;
     }
-    resolve(delOK);
-  });
-});
+    resolve(obj);
+  }));
 
-const deleteItem = (dbo, collection, filter = {}) => new Promise((resolve, reject) => dbo.collection(collection).deleteOne(filter, (err, obj) => {
-  if (err) {
-    reject(err);
-    return;
-  }
-  resolve(obj);
-}));
-
-const deleteItems = (dbo, collection, filter = {}) => new Promise((resolve, reject) => dbo.collection(collection).deleteMany(filter, (err, obj) => {
-  if (err) {
-    reject(err);
-    return;
-  }
-  resolve(obj);
-}));
+const deleteItems = (dbo, collection, filter = {}) => new Promise((resolve, reject) => dbo.collection(collection)
+  .deleteMany(filter, (err, obj) => {
+    if (err) {
+      reject(err);
+      return;
+    }
+    resolve(obj);
+  }));
 
 const update = (dbo, collection, filter = {}, newProp = {}) => new Promise((resolve, reject) => {
   const newvalues = { $set: newProp };
-  dbo.collection(collection).updateOne(filter, newvalues, (err, res) => {
-    if (err) {
-      reject(err);
-      return;
-    }
-    resolve(res);
-  });
+  dbo.collection(collection)
+    .updateOne(filter, newvalues, (err, res) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(res);
+    });
 });
 
 const updateMany = (dbo, collection, filter = {}, newProp = {}) => new Promise((resolve, reject) => {
   const newvalues = { $set: newProp };
-  dbo.collection(collection).updateMany(filter, newvalues, (err, res) => {
-    if (err) {
-      reject(err);
-      return;
-    }
-    resolve(res);
-  });
+  dbo.collection(collection)
+    .updateMany(filter, newvalues, (err, res) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(res);
+    });
 });
+
+const aggregation = (dbo,
+  collection,
+  match,
+  lookup,
+  start = 0,
+  end = 10 ** 10) => new Promise((resolve, reject) => dbo.collection(collection)
+  .aggregate([
+    { $match: match },
+    { $lookup: lookup },
+  ])
+  .skip(start)
+  .limit(end)
+  .toArray((err, res) => {
+    if (err) reject(err);
+    resolve(res);
+  }));
 
 module.exports = {
   connectDb,
@@ -167,4 +191,5 @@ module.exports = {
   limit,
   update,
   updateMany,
+  aggregation,
 };

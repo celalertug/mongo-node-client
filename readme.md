@@ -1,6 +1,8 @@
+
 ## usage
 
 `yarn add mongo-node-client`
+
 
 ```js
 const {connectDb,
@@ -23,6 +25,12 @@ const {connectDb,
     await mongoClient.updateMany({ user: 'adam' }, { age: 88 });
     await mongoClient.deleteItem({ user: 'adam' });
     await mongoClient.deleteItems({ user: 'adam' });
+    await mongoClient.aggregation({ user: 'adam' }, {
+          from: 'join-table',
+          localField: 'appleId',
+          foreignField: 'id',
+          as: 'apple',
+        }, 0, 5);
 
 disconnectDb(db);
 })()
@@ -110,3 +118,9 @@ disconnectDb(db);
 ### findOne result :  Object  (if not found null)
 
 
+
+### docker mongo
+
+```
+docker run -d --rm --name mongodb -p 27017:27017 mongo
+```
