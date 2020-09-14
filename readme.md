@@ -124,3 +124,6 @@ disconnectDb(db);
 ```
 docker run -d --rm --name mongodb -p 27017:27017 mongo
 ```
+
+
+[$match (aggregation)](https://docs.mongodb.com/manual/reference/operator/aggregation/match/#examples)
