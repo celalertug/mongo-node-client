@@ -27,4 +27,22 @@ describe('real test', () => {
     const res = await mongoClient.count();
     console.log(res);
   });
+
+  it('should create index', async () => {
+    const db = await connectDb('mongodb://localhost:27017');
+    const dbo = db.db('adminpanel');
+    const mongoClient = create(dbo, 'transactions');
+
+    try {
+      await mongoClient.createIndex({ status: 'text', bank: 'text' });
+    } catch (err) {
+      console.error('index error');
+      console.error(err);
+    }
+
+    const res = await mongoClient.find({ $text: { $search: 'xxx' } });
+    console.log(res);
+
+    // disconnectDb(db);
+  });
 });

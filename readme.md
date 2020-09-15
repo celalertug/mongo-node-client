@@ -32,6 +32,11 @@ const {connectDb,
           foreignField: 'id',
           as: 'apple',
         }, 0, 5);
+  
+    // full text search
+    await mongoClient.createIndex({ status: 'text', bank: 'text' });
+    const res = await mongoClient.find({ $text: { $search: 'xxx' } });
+
 
 disconnectDb(db);
 })()
@@ -128,3 +133,8 @@ docker run -d --rm --name mongodb -p 27017:27017 mongo
 
 
 [$match (aggregation)](https://docs.mongodb.com/manual/reference/operator/aggregation/match/#examples)
+
+
+## todo
+
+* implement full text search mock

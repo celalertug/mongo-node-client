@@ -2,6 +2,7 @@ const {
   connectDb,
   disconnectDb,
   createCollection,
+  createIndex,
   deleteItem,
   deleteItems,
   dropCollection,
@@ -23,6 +24,7 @@ module.exports = {
   create: (dbo, collection) => ({
     createCollection: () => createCollection(dbo, collection),
     dropCollection: () => dropCollection(dbo, collection),
+    createIndex: (...args) => createIndex(dbo, collection, ...args),
     deleteItem: (...args) => deleteItem(dbo, collection, ...args),
     deleteItems: (...args) => deleteItems(dbo, collection, ...args),
     find: (...args) => find(dbo, collection, ...args),

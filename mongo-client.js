@@ -26,6 +26,8 @@ const createCollection = (dbo, collection) => new Promise((resolve, reject) => {
   });
 });
 
+const createIndex = (dbo, collection, indexes) => dbo.collection(collection).createIndex(indexes);
+
 const insert = (dbo, collection, item) => new Promise((resolve, reject) => {
   dbo.collection(collection)
     .insertOne(item, (err, res) => {
@@ -183,6 +185,7 @@ module.exports = {
   disconnectDb,
   createDbo,
   createCollection,
+  createIndex,
   deleteItem,
   deleteItems,
   dropCollection,
