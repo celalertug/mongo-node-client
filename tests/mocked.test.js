@@ -29,6 +29,7 @@ describe('mock', () => {
   let limit;
   let update;
   let updateMany;
+  let count;
 
   const collectionName = 'myCollection';
   let db;
@@ -48,6 +49,7 @@ describe('mock', () => {
     limit = service.limit;
     update = service.update;
     updateMany = service.updateMany;
+    count = service.count;
 
     await createCollection();
     await insert({ user: 123, pass: 12313 });
@@ -60,6 +62,11 @@ describe('mock', () => {
 
   afterEach(() => {
     disconnectDb(db);
+  });
+
+  it('should count', async () => {
+    const res = await count();
+    assert.deepStrictEqual(res, 6);
   });
 
   it('should createCollection', async () => {

@@ -14,6 +14,7 @@ const {
   update,
   updateMany,
   aggregation,
+  count,
 } = require('./mongo-client.js');
 
 module.exports = {
@@ -33,5 +34,6 @@ module.exports = {
     update: (...args) => update(dbo, collection, ...args),
     updateMany: (...args) => updateMany(dbo, collection, ...args),
     aggregation: (...args) => aggregation(dbo, collection, ...args),
+    count: (...args) => count(dbo, collection, ...args),
   }),
 };

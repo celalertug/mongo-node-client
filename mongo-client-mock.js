@@ -108,6 +108,23 @@ const find = (dbo, collection, filter = {}) => new Promise((resolve, reject) => 
   });
 });
 
+const count = (dbo, collection) => new Promise((resolve, reject) => {
+  fs.readFile(dbo, 'utf8', (err, data) => {
+    if (err) {
+      return reject(err);
+    }
+
+    const d = JSON.parse(data);
+    const res = d[collection];
+    return resolve(res.length);
+    // forEach(filter, (v, k) => {
+    //   res = res.filter((i) => i[k] === v);
+    // });
+    //
+    // return resolve(res);
+  });
+});
+
 const limit = (dbo, collection, lim, filter = {}) => new Promise((resolve, reject) => {
   fs.readFile(dbo, 'utf8', (err, data) => {
     if (err) {
@@ -348,4 +365,5 @@ module.exports = {
   update,
   updateMany,
   dropCollection,
+  count,
 };

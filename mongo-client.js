@@ -175,6 +175,9 @@ const aggregation = (dbo,
     resolve(res);
   }));
 
+const count = (dbo, collection) => dbo.collection(collection)
+  .count();
+
 module.exports = {
   connectDb,
   disconnectDb,
@@ -192,4 +195,5 @@ module.exports = {
   update,
   updateMany,
   aggregation,
+  count,
 };

@@ -13,6 +13,7 @@ const {
   limit,
   update,
   updateMany,
+  count,
 } = require('./mongo-client-mock');
 
 module.exports = {
@@ -31,5 +32,6 @@ module.exports = {
     limit: (...args) => limit(dbo, collection, ...args),
     update: (...args) => update(dbo, collection, ...args),
     updateMany: (...args) => updateMany(dbo, collection, ...args),
+    count: (...args) => count(dbo, collection, ...args),
   }),
 };

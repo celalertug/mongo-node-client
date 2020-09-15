@@ -18,4 +18,13 @@ describe('real test', () => {
     console.log(JSON.stringify(res, null, 2));
     disconnectDb(db);
   });
+
+  it('should count', async () => {
+    const db = await connectDb('mongodb://localhost:27017');
+    const dbo = db.db('adminpanel');
+    const mongoClient = create(dbo, 'transactions');
+
+    const res = await mongoClient.count();
+    console.log(res);
+  });
 });
