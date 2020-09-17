@@ -45,4 +45,15 @@ describe('real test', () => {
 
     // disconnectDb(db);
   });
+
+  it('should paginate', async () => {
+    const db = await connectDb('mongodb://localhost:27017');
+    const dbo = db.db('adminpanel');
+    const mongoClient = create(dbo, 'transactions');
+
+    const res = await mongoClient.paginate(2, 2, { bank: 'ziraat' });
+    console.log(res);
+
+    disconnectDb(db);
+  });
 });

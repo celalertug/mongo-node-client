@@ -16,6 +16,7 @@ const {
   updateMany,
   aggregation,
   count,
+  paginate,
 } = require('./mongo-client.js');
 
 module.exports = {
@@ -37,5 +38,6 @@ module.exports = {
     updateMany: (...args) => updateMany(dbo, collection, ...args),
     aggregation: (...args) => aggregation(dbo, collection, ...args),
     count: (...args) => count(dbo, collection, ...args),
+    paginate: (...args) => paginate(dbo, collection, ...args),
   }),
 };

@@ -77,6 +77,21 @@ const limit = (dbo, collection, lim, filter = {}) => new Promise((resolve, rejec
     });
 });
 
+const paginate = (dbo, collection, start, lim, filter = {}) => new Promise((resolve, reject) => {
+  dbo
+    .collection(collection)
+    .find(filter)
+    .skip(start)
+    .limit(lim)
+    .toArray((err, result) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(result);
+    });
+});
+
 const findAndSort = (dbo, collection, sort, filter = {}) => new Promise((resolve, reject) => {
   dbo
     .collection(collection)
@@ -199,4 +214,5 @@ module.exports = {
   updateMany,
   aggregation,
   count,
+  paginate,
 };

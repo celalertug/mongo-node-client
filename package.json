@@ -1,9 +1,9 @@
 {
   "name": "mongo-node-client",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "mongodb wrapper functions and its mocks",
   "main": "index.js",
-  "repository": "https://github.com/celalertug/js-mocha-template",
+  "repository": "https://github.com/celalertug/mongo-node-client",
   "author": "celal ertug",
   "license": "MIT",
   "scripts": {
