@@ -26,6 +26,7 @@ const {connectDb,
     await mongoClient.deleteItem({ user: 'adam' });
     await mongoClient.deleteItems({ user: 'adam' });
     await mongoClient.count();
+    await mongoClient.paginate(5, 12, {user : 'adam'});
     await mongoClient.aggregation({ user: 'adam' }, {
           from: 'join-table',
           localField: 'appleId',
