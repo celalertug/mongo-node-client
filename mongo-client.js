@@ -180,11 +180,13 @@ const aggregation = (dbo,
   match,
   lookup,
   start = 0,
-  end = 10 ** 10) => new Promise((resolve, reject) => dbo.collection(collection)
+  end = 10 ** 10,
+  sort = '') => new Promise((resolve, reject) => dbo.collection(collection)
   .aggregate([
     { $match: match },
     { $lookup: lookup },
-  ])
+    sort ? { $sort: { [sort]: -1 } } : null,
+  ].filter((i) => i))
   .skip(start)
   .limit(end)
   .toArray((err, res) => {

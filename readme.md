@@ -33,6 +33,12 @@ const {connectDb,
           foreignField: 'id',
           as: 'apple',
         }, 0, 5);
+    await mongoClient.aggregation({ user: 'adam' }, {
+          from: 'join-table',
+          localField: 'appleId',
+          foreignField: 'id',
+          as: 'apple',
+        }, 0, 5,"age"); // age is sort key
   
     // full text search
     await mongoClient.createIndex({ status: 'text', bank: 'text' });
